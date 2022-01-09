@@ -5,7 +5,7 @@ fi
 
 aws cloudformation create-stack \
   --stack-name "$1-poleselli-sub-domain" \
-  --template-body file://cf-subdomain-cloudfront.yaml \
+  --template-body file://cfn-main.yaml \
   --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND \
   --region us-east-1 \
   --parameters \

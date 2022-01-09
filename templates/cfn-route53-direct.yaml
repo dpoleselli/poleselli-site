@@ -1,3 +1,5 @@
+Description: Create a S3 bucket and Route 53 record for a poleselli.com subdomain
+
 Parameters:
   SubDomainName:
     Description: Sub-domain name for poleselli.com
@@ -28,6 +30,7 @@ Mappings:
     sa-east-1:
       S3hostedzoneID: Z31GFT0UA1I2HV
       websiteendpoint: s3-website-sa-east-1.amazonaws.com
+
 Resources:
   SubDomainBucket:
     Type: AWS::S3::Bucket
@@ -38,6 +41,7 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
+
   BucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
@@ -55,7 +59,8 @@ Resources:
                 - !Ref SubDomainBucket
                 - /*
       Bucket: !Ref SubDomainBucket
-  myDNS:
+
+  Route53RecordSetGroup:
     Type: AWS::Route53::RecordSetGroup
     Properties:
       HostedZoneName: 'poleselli.com.'
