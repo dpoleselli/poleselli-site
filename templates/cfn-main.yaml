@@ -1,19 +1,22 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create a subdomain of poleselli.com with S3, CloudFront, and Route53
+Description: Create a publically accessible website with S3, CloudFront, and Route53
 
 Parameters:
-  SubDomainName:
-    Description: Sub-domain name for poleselli.com
+  DomainName:
+    Description: Domain name for the stack
+    Type: String
+  HostedZone:
+    Description: Hosted zone name to create the Route 53 record
     Type: String
   AcmCertificateArn:
     Description: Arn of the SSL certificate
     Type: String
 
 Resources:
-  SubDomainBucket:
+  S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub '${SubDomainName}.poleselli.com'
+      BucketName: !Ref DomainName
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -24,7 +27,7 @@ Resources:
   S3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref 'SubDomainBucket'
+      Bucket: !Ref 'S3Bucket'
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -33,7 +36,7 @@ Resources:
             Effect: Allow
             Resource: !Sub
               - ${S3Arn}/*
-              - S3Arn: !GetAtt  SubDomainBucket.Arn
+              - S3Arn: !GetAtt  S3Bucket.Arn
             Principal:
               CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
 
@@ -42,22 +45,26 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - !Sub '${SubDomainName}.poleselli.com'
+          - !Ref DomainName
         DefaultCacheBehavior:
           Compress: true
           DefaultTTL: 86400
           ForwardedValues:
             QueryString: true
           MaxTTL: 31536000
-          TargetOriginId: !Sub 'S3-${SubDomainName}.poleselli.com'
+          TargetOriginId: !Sub 
+            - 'S3-${DomainName}.poleselli.com'
+            - DomainName: !Ref DomainName
           ViewerProtocolPolicy: 'redirect-to-https'
         Enabled: true
         HttpVersion: 'http2'
         DefaultRootObject: 'index.html'
         IPV6Enabled: true
         Origins:
-          - DomainName: !GetAtt SubDomainBucket.DomainName
-            Id: !Sub 'S3-${SubDomainName}.poleselli.com'
+          - DomainName: !GetAtt S3Bucket.DomainName
+            Id: !Sub 
+            - 'S3-${DomainName}.poleselli.com'
+            - DomainName: !Ref DomainName
             S3OriginConfig:
               OriginAccessIdentity:
                 !Join ['', ['origin-access-identity/cloudfront/', !Ref CloudFrontOriginAccessIdentity]]
@@ -74,14 +81,14 @@ Resources:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub 'CloudFront OAI for ${SubDomainName}.poleselli.com'
+        Comment: !Sub 'CloudFront OAI for ${DomainName}.poleselli.com'
 
   Route53RecordSetGroup:
     Type: AWS::Route53::RecordSetGroup
     Properties:
-      HostedZoneName: 'poleselli.com.'
+      HostedZoneName: !Sub '${HostedZone}.'
       RecordSets:
-      - Name: !Sub '${SubDomainName}.poleselli.com'
+      - Name: !Ref DomainName
         Type: 'A'
         AliasTarget:
           DNSName: !GetAtt 'CloudFrontDistribution.DomainName'
