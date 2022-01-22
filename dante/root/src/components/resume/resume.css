@@ -22,6 +22,10 @@
   font-weight: bold;
 }
 
+.section-subheader-spacing {
+  margin-left: 20px;
+}
+
 .section-right-text {
   font-style: italic;
 }

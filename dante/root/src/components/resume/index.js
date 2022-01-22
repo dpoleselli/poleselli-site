@@ -1,6 +1,16 @@
 import "./resume.css"
 import content from "./content"
 
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+import 'react-accessible-accordion/dist/fancy-example.css';
+
 export default function Resume() {
     return (
         <div className="container">
@@ -45,28 +55,40 @@ export default function Resume() {
                     <span className="section-right-text">{ content.education.dates }</span>
                 </div>
                 <ul>
-                    { content.education.bullets.map(text => <li>{ text }</li>) }
+                    { content.education.bullets.map(text => <li key={ text }>{ text }</li>) }
                 </ul>
             </section>
 
             <section>
                 <h3 className="section-header">Experience</h3>
-                { content.experience.jobs.map(job => {
-                    return (
-                        <div className="job">
-                            <div className="flex-between">
-                                <span className="section-subheader">
-                                    { job.title }
-                                </span>
-                                <span className="section-right-text">{ job.dates }</span>
-                            </div>
-                            <span className="company">{ job.company }</span>
-                            <ul>
-                                { job.bullets.map(text => <li>{ text }</li>) }
-                            </ul>
-                        </div>
-                    )
-                }) }
+                <Accordion allowMultipleExpanded allowZeroExpanded>
+                    { content.experience.jobs.map(job => {
+                        return (
+                            <AccordionItem key={ job.company + "-" + job.title }>
+                                <div className="job">
+                                    <AccordionItemHeading>
+                                        <AccordionItemButton>
+                                            <div className="section-subheader-spacing">
+                                                <div className="flex-between">
+                                                    <span className="section-subheader">
+                                                        { job.title }
+                                                    </span>
+                                                    <span className="section-right-text">{ job.dates }</span>
+                                                </div>
+                                                <span className="company">{ job.company }</span>
+                                            </div>
+                                        </AccordionItemButton>
+                                    </AccordionItemHeading>
+                                    <AccordionItemPanel>
+                                        <ul>
+                                            { job.bullets.map(text => <li key={ text }>{ text }</li>) }
+                                        </ul>
+                                    </AccordionItemPanel>
+                                </div>
+                            </AccordionItem>
+                        )
+                    }) }
+                </Accordion>
             </section>
 
             <div className="row">
@@ -74,7 +96,7 @@ export default function Resume() {
                     <section>
                         <h3 className="section-header">Certifications</h3>
                         <ul>
-                            { content.certifications.map(cert => <li>{ cert }</li>) }
+                            { content.certifications.map(cert => <li key={ cert }>{ cert }</li>) }
                         </ul>
                     </section>
                 </div>
@@ -82,7 +104,7 @@ export default function Resume() {
                     <section>
                         <h3 className="section-header">Accomplishments & Interests</h3>
                         <ul>
-                            { content.accomplishments.map(text => <li>{ text }</li>) }
+                            { content.accomplishments.map(text => <li key={ text }>{ text }</li>) }
                         </ul>
                     </section>
                 </div>
@@ -93,9 +115,9 @@ export default function Resume() {
                 <div className="row">
                     { content.skills.map(col => {
                         return (
-                            <div className="column">
+                            <div className="column" key={ col[0][0] }>
                                 <ul>
-                                    { col.map(skill => <li>{ skill }</li>) }
+                                    { col.map(skill => <li key={ skill }>{ skill }</li>) }
                                 </ul>
                             </div>
                         )
