@@ -1,0 +1,46 @@
+.container {
+  font-family: Serif;
+  margin: 20px;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove-margin {
+  margin: 0px;
+}
+
+.section-header {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.section-subheader {
+  color: rgb(34, 34, 34);
+  font-weight: bold;
+}
+
+.section-right-text {
+  font-style: italic;
+}
+
+.company {
+  font-size: small;
+  font-style: italic;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
