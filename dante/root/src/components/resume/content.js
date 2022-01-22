@@ -1,3 +1,38 @@
+const skills = {
+    js: "JavaScript",
+    ts: "TypeScript",
+    python: "Python",
+    java: "Java",
+    html: "HTML",
+    css: "CSS",
+    sql: "SQL",
+    apex: "Apex",
+    bash: "Bash",
+    lit: "Lit",
+    react: "React",
+    angular: "Angular",
+    vue: "Vue.js",
+    sfdc: "Salesforce",
+    jquery: "JQuery",
+    django: "Django",
+    mongo: "MongoDB",
+    ror: "Ruby on Rails",
+    rest: "REST",
+    mfe: "Micro-frontend (MFE)",
+    s3: "AWS S3",
+    ec2: "AWS EC2",
+    cloudFront: "AWS CloudFront",
+    route53: "AWS Route 53",
+    cloudFormation: "AWS CloudFormation",
+    heroku: "Heroku",
+    git: "Git",
+    linux: "Linux",
+    jira: "Jira",
+    githubActions: "GitHub Actions",
+    bitbucket: "Bitbucket Pipelines",
+    jenkins: "Jenkins"
+}
+
 const content = {
     header: {
         name: "Dante Poleselli",
@@ -26,7 +61,11 @@ const content = {
                     "Developed Micro-frontend apps using Lit Element to improve reusability and better organize team structure",
                     "Sped up clients' time-to-delivery by several months",
                     "Monitored real-time user metrics to identify bugs and gain insights to improve user experience"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js, skills.ts, skills.java, skills.html, skills.css, skills.lit, skills.react, skills.angular],
+                    col1: [skills.mfe, skills.s3, skills.cloudFront, skills.route53, skills.git, skills.jira, skills.jenkins]
+                }
             },
             {
                 title: "Junior Software Engineer",
@@ -37,7 +76,11 @@ const content = {
                     "Developed responsive Vue.js components",
                     "Engineered a RESTful API using Ruby on Rails",
                     "Managed competing requirements from various clients"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js, skills.ts, skills.python, skills.html, skills.css, skills.sql, skills.apex, skills.bash, skills.sfdc],
+                    col1: [skills.vue, skills.mongo, skills.ror, skills.rest, skills.git, skills.linux, skills.jira, skills.githubActions, skills.bitbucket]
+                }
             },
             {
                 title: "Founder/Developer",
@@ -47,7 +90,11 @@ const content = {
                     "Prototyped, developed, and tested a real-time baseball analytics web app",
                     "Held regular meetings with stakeholders to provide status updates and receive feedback",
                     "Beta launched the product and used continuous development practices to implement bug patches and feature additions"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js, skills.python, skills.html, skills.css],
+                    col1: [skills.django, skills.heroku, skills.git]
+                }
             },
             {
                 title: "Lead Salesforce Developer",
@@ -57,7 +104,11 @@ const content = {
                     "Supervised a team of 10 Salesforce developers in the buildout of an enterprise system to include multiple departments",
                     "Collaborated with stakeholders on finding creative solutions to existing pain points",
                     "Cultivated and maintained team efficiency and effectiveness"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js, skills.html, skills.css, skills.sql, skills.apex],
+                    col1: [skills.sfdc, skills.git, skills.jira, skills.bitbucket]
+                }
             },
             {
                 title: "Salesforce Developer",
@@ -68,7 +119,11 @@ const content = {
                     "Implemented customizations to the Salesforce platform using Apex, Lightning Components, Process Builders, and other Salesforce tools, while maintaining best practices",
                     "Designed, built, and tested a key importing feature to allow bulk loading of new information",
                     "Analyzed and repaired code base flaws and inefficiencies"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js, skills.html, skills.css, skills.sql, skills.apex],
+                    col1: [skills.sfdc, skills.git, skills.jira, skills.bitbucket]
+                }
             },
             {
                 title: "Sales Team Support",
@@ -78,7 +133,10 @@ const content = {
                     "Identified and organized potential leads in new territories",
                     "Gathered contact information of potential customers to support sales reps with lead generation",
                     "Communicated with existing customers to collect important certificates"
-                ]
+                ],
+                skills: {
+                    col0: [skills.js]
+                }
             }
         ]
     },
@@ -98,40 +156,45 @@ const content = {
     ],
     skills: [
         [
-            "JavaScript",
-            "Python",
-            "Java",
-            "HTML",
-            "CSS",
-            "SQL",
-            "Apex",
-            "Bash"
+            skills.js,
+            skills.ts,
+            skills.python,
+            skills.java,
+            skills.html,
+            skills.css,
+            skills.sql,
+            skills.apex,
+            skills.bash
         ],
         [
-            "Lit",
-            "React",
-            "Angular",
-            "Vue.js",
-            "JQuery",
-            "Django",
-            "MongoDB",
-            "Ruby on Rails",
-            "REST",
-            "Micro-frontend (MFE)"
+            skills.lit,
+            skills.react,
+            skills.angular,
+            skills.vue,
+            skills.sfdc,
+            skills.jquery,
+            skills.django,
+            skills.mongo,
+            skills.ror,
+            skills.rest,
+            skills.mfe
         ],
         [
-            "AWS S3",
-            "AWS EC2",
-            "AWS CloudFront",
-            "AWS Route 53",
-            "AWS CloudFormation",
-            "Git",
-            "Linux",
-            "Jira",
-            "GitHub Actions",
-            "Bitbucket Pipelines"
+            skills.s3,
+            skills.ec2,
+            skills.cloudFront,
+            skills.route53,
+            skills.cloudFormation,
+            skills.heroku,
+            skills.git,
+            skills.linux,
+            skills.jira,
+            skills.githubActions,
+            skills.bitbucket,
+            skills.jenkins
         ]
     ]
 }
+
 
 export default content

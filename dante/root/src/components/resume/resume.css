@@ -48,3 +48,41 @@
   flex-basis: 100%;
   flex: 1;
 }
+
+.skills-applied {
+  margin-left: 10%;
+}
+
+.skills-header {
+  margin: 0px;
+}
+
+.skills-col0 {
+  animation-duration: 1.5s;
+  animation-name: slidein;
+}
+
+.skills-col1 {
+  animation-duration: 0.5s, 1.5s;
+  animation-delay: 0s, 0.5s;
+  animation-name: hide, slidein;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateY(1000%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}

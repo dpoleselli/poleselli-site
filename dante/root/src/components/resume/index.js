@@ -83,6 +83,22 @@ export default function Resume() {
                                         <ul>
                                             { job.bullets.map(text => <li key={ text }>{ text }</li>) }
                                         </ul>
+                                        { job.skills?.col0 ?
+                                            <div className="skills-applied">
+                                                <h5 className="skills-header">Skills Applied</h5>
+                                                <div className="row">
+                                                    <div className="column">
+                                                        <ul className="skills-col0">
+                                                            { job.skills?.col0?.map(skill => <li key={ skill }>{ skill }</li>) }
+                                                        </ul>
+                                                    </div>
+                                                    <div className="column">
+                                                        <ul className="skills-col1">
+                                                            { job.skills?.col1?.map(skill => <li key={ skill }>{ skill }</li>) }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div> : null }
                                     </AccordionItemPanel>
                                 </div>
                             </AccordionItem>
